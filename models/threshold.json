@@ -1,0 +1,38 @@
+{
+  "threshold": 0.21,
+  "target_sensitivity": 0.95,
+  "min_specificity": 0.95,
+  "target_reached": true,
+  "test_default": {
+    "sensitivity": 0.8704010606562811,
+    "specificity": 0.998758106802815,
+    "fn": 391,
+    "fp": 18,
+    "accuracy": 0.9756724344697618,
+    "balanced_accuracy": 0.815336122384015,
+    "per_class_recall": [
+      0.998758106802815,
+      0.6089887640449438,
+      0.885146804835924,
+      0.625,
+      0.9587869362363919
+    ],
+    "name": "default"
+  },
+  "test_tuned": {
+    "sensitivity": 0.9552535631421942,
+    "specificity": 0.9839243825031048,
+    "fn": 135,
+    "fp": 233,
+    "accuracy": 0.9763006110444863,
+    "balanced_accuracy": 0.8948408142146448,
+    "per_class_recall": [
+      0.9839243825031048,
+      0.797752808988764,
+      0.9620034542314335,
+      0.7421875,
+      0.9883359253499222
+    ],
+    "name": "tuned"
+  }
+}

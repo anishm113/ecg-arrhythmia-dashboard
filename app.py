@@ -1,6 +1,6 @@
 """
 app.py -- interactive dashboard for the ECG arrhythmia detector
-Run:  streamlit run app.py
+Run:  python -m streamlit run app.py
 Needs: models/random_forest_tuned.joblib + models/threshold.json (from step2b_tune_threshold.py)
        data/mitbih_train.csv (first launch only, to build models/dashboard_cache.npz)
 """
@@ -23,7 +23,9 @@ from ecg_utils import (CLASS_NAMES, CLASS_SHORT, DATA_PATH, MODEL_DIR, load_mitb
 from step2_train_model import RANDOM_STATE, TEST_SIZE
 from step2b_tune_threshold import THRESHOLDS, predict_with_threshold, safety_stats
 
-MODEL_PATH = MODEL_DIR / "random_forest_tuned.joblib"
+FULL_MODEL_PATH = MODEL_DIR / "random_forest_tuned.joblib"     # local: from step2b
+DEPLOY_MODEL_PATH = MODEL_DIR / "random_forest_deploy.joblib"  # online: from make_deploy_model.py
+MODEL_PATH = FULL_MODEL_PATH if FULL_MODEL_PATH.exists() else DEPLOY_MODEL_PATH
 THRESHOLD_PATH = MODEL_DIR / "threshold.json"
 CACHE_PATH = MODEL_DIR / "dashboard_cache.npz"
 BEATS_PER_CLASS = 200        # demo beats per class (Fusion has only 128 in the test set)
@@ -222,7 +224,7 @@ def tab_safety(cache, t, t_star):
         ax.grid(alpha=0.25)
         for side in ("top", "right"):
             ax.spines[side].set_visible(False)
-        ax.legend(fontsize=8, frameon=False, loc="lower left")
+        ax.legend(fontsize=8, loc="lower left", frameon=True, framealpha=0.92, edgecolor="none")
         ax.set_title("Every threshold trades one error for the other", fontsize=10, loc="left")
         fig.tight_layout()
         st.pyplot(fig)

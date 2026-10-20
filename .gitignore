@@ -1,0 +1,11 @@
+   # Dataset is too large for GitHub (>100 MB) -- users download it from Kaggle
+   data/*.csv
+   # Trained model can be large; regenerate with step2b_tune_threshold.py
+   models/*.joblib
+   # Python / OS clutter
+   __pycache__/
+   *.pyc
+   .venv/
+   venv/
+   .DS_Store
+   .ipynb_checkpoints/
